@@ -11,6 +11,7 @@ namespace CORECRUD.Models
 
         public DbSet<Department> Department_ { get; set; }
         public DbSet<People> People_ { get; set; }
+        public DbSet<User> User_ { get; set; }
 
         //add-migration "First-1"
         //update-database

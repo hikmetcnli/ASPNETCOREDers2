@@ -1,9 +1,14 @@
 ﻿using CORECRUD.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CORECRUD.Controllers
 {
-	public class HomeController : Controller
+    [Authorize(Roles = "Admin")]
+    public class HomeController : Controller
 	{
 		Context c = new Context();
 		public IActionResult Index()
@@ -27,7 +32,8 @@ namespace CORECRUD.Controllers
 
 			
 		}
-		[HttpPost]
+		       
+        [HttpPost]
 		public IActionResult New(Department d)
 		{
 			if (d.DepartmentID == 0)
@@ -48,8 +54,8 @@ namespace CORECRUD.Controllers
 			 
 			return RedirectToAction("Index");
 		}
-
-		[HttpGet]
+		         
+        [HttpGet]
         public string Postman(string Name,string Surname)
         {
             return Name + Surname;
@@ -72,9 +78,16 @@ namespace CORECRUD.Controllers
 				c.Department_.Remove(d);
 				c.SaveChanges();
 			}
-
 			return RedirectToAction("Index");
 		}
 
-	}
+		[HttpGet]
+		public async Task<IActionResult> Logout()
+		{
+			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme );
+			return RedirectToAction("Index","Login");
+		}
+
+
+		}
 }
