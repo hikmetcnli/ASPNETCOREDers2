@@ -13,19 +13,55 @@ namespace CORECRUD.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult New()
+		public IActionResult New(int ID)
 		{
-			return View();
-		}
+			if (ID == 0) //YENİ DEPARTMAN KAYDI
+			{
+				return View();
+			}
+			else
+			{
+				var depart = c.Department_.Find(ID);
+				return View(depart);
+			}
 
+			
+		}
 		[HttpPost]
 		public IActionResult New(Department d)
 		{
-			c.Department_.Add(d);
-			c.SaveChanges();
+			if (d.DepartmentID == 0)
+			{
+				c.Department_.Add(d);
+				c.SaveChanges();
+			}
+			else
+			{
+				var dep = c.Department_.Find(d.DepartmentID);
+				dep.DepartmentName= d.DepartmentName;
+				dep.Description1= d.Description1;
+				dep.Description2 = "Düzenlenmiştir." + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
+				c.SaveChanges();
+			}
+
+			 
 			return RedirectToAction("Index");
 		}
+
+		[HttpGet]
+        public string Postman(string Name,string Surname)
+        {
+            return Name + Surname;
+        }
+        [HttpGet]
+        public int Toplama(int Num1, int Num2)
+        {
+            return Num1 + Num2;
+        }
+
+
+       
 
 		public IActionResult Delete(int ID)
 		{

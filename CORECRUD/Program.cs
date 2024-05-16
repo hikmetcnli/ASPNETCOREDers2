@@ -9,7 +9,7 @@ app.MapControllerRoute(name: "default",
 
     );
 //app.MapGet("/", () => "Hello World!");
-
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.Run();
