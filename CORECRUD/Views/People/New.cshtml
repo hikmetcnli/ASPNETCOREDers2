@@ -1,4 +1,5 @@
-﻿@model CORECRUD.Models.People;
+﻿ 
+@model CORECRUD.Models.People;
 
 @{
 	Layout = "_Shared";
@@ -20,7 +21,16 @@
 	@Html.LabelFor(x => x.City)
 	@Html.TextBoxFor(x => x.City, new { @class = "form-control" })
 
-	 
+	<hr />
+
+	<select id="DepartmentID" name="DepartmentID" class="form-control">
+		 @foreach (var item in ViewBag.Department)
+		{
+			<option value="@item.Value"> @item.Text </option>
+		}
+	</select>
+
+
 	<br />
 	<button class="btn btn-success">Yeni Departman Kaydet</button>
 
