@@ -24,7 +24,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(name: "default",
-        pattern: "{controller=Login}/{action=Index}"
+        pattern: "{controller=People}/{action=Index}"
 
     );
 //app.MapGet("/", () => "Hello World!");

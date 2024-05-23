@@ -15,7 +15,7 @@ namespace CORECRUD.Models
         public string Surname { get; set; }
 
         [Column(TypeName = "VARCHAR(250)")]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         public int DepartmentID { get; set; }
         public Department _Depart { get; set; }
